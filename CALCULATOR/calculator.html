@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <link rel = "stylesheet" href = "style/calculator.css">
+  </head>
+  <body>
+    <p></p>
+
+    <div>
+      <button class = "operants" onclick = "display(1);">1</button>
+      <button class = "operants" onclick = "display(2);">2</button>
+      <button class = "operants" onclick = 'display(3);'>3</button>
+      <button class = "operators" onclick = 'display("+");'>+</button>
+    </div>
+    
+    <div>
+      <button class = "operants" onclick = 'display(4);'>4</button>
+      <button class = "operants" onclick = 'display(5);'>5</button>
+      <button class = "operants" onclick = 'display(6);'>6</button>
+      <button class = "operators minus" onclick = 'display("-");'>-</button>
+    </div>
+
+    <div>
+      <button class = "operants" onclick = 'display(7);'>7</button>
+      <button class = "operants" onclick = 'display(8);'>8</button>
+      <button class = "operants" onclick = 'display(9);'>9</button>
+      <button class = "operators multi" onclick = 'display("*");'>*</button>
+    </div>
+
+    <div>
+      <button class = "operants" onclick = 'display(0);'>0</button>
+      <button class = "operants" onclick = 'display(".");'>.</button>
+      <button class = "operants" onclick = 'display("=")'>=</button>
+      <button class = "operators divide" onclick = 'display("/");'>/</button>
+    </div>
+    
+    <button class = "operants clr" onclick = 'display("clr");'>clr</button>
+
+    <script src = "script/calculator.js"></script>
+  </body>
+</html>
