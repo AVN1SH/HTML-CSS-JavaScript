@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #stopwatch {
+      font-size: 36px;
+      background: yellow; /* Initial background color */
+    }
+  </style>
+</head>
+<body>
+  <div id="stopwatch">0.00</div>
+  <button id="startStopButton">Start</button>
+  <button id="resetButton">Reset</button>
+  <script>const stopwatch = document.getElementById('stopwatch');
+    const startStopButton = document.getElementById('startStopButton');
+    const resetButton = document.getElementById('resetButton');
+    let running = false;
+    let intervalId;
+    
+    startStopButton.addEventListener('click', function () {
+      if (running) {
+        clearInterval(intervalId);
+        startStopButton.textContent = 'Start';
+      } else {
+        intervalId = setInterval(updateStopwatch, 10);
+        startStopButton.textContent = 'Stop';
+      }
+      running = !running;
+    });
+    
+    resetButton.addEventListener('click', function () {
+      clearInterval(intervalId);
+      stopwatch.textContent = '0.00';
+      running = false;
+      startStopButton.textContent = 'Start';
+    });
+    
+    let currentTime = 0;
+    
+    function updateStopwatch() {
+      currentTime += 0.01;
+      stopwatch.textContent = currentTime.toFixed(2);
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+body {
+  font-family : Arial;
+  background-color: rgb(30, 29, 29);
+}
+
+p {
+  display : inline-block;
+  color : white;
+}
+
+.stopwatch {
+  display : flex;
+  flex : 0;
+  flex-direction : column;
+  margin-top  : 50px;
+  margin-left : 10px;
+  margin-right : 10px;
+  align-items: center;
+}
+
+.timer {
+  /*display : flex;
+  justify-content: center;
+  align-items: center;
+ 
+  width : 300px;
+  height : 300px;
+  background-color : rgb(73, 75, 200);
+  border-radius: 150px;
+  */
+  width : 250px;
+  height : 255px;
+  background-color : rgb(73, 75, 200);
+  padding-left : 50px;
+  padding-right : 30px;
+  padding-top : 75px;
+  border-radius : 260px;
+}
+
+.minutes, .seconds, .colon, .dot{
+  font-size : 60px;
+  font-weight : bold;
+}
+
+.mini-seconds {
+  font-size : 40px;
+  font-weight : bold;
+}
+
+.icons {
+  
+  margin-top : 20px;
+  
+}
+
+.play-icon {
+  background-color: rgba(73, 75, 200, 0.15);
+  width : 70px;
+  border-radius : 50px;
+  cursor : pointer;
+  transition : background-color 0.5s;
+}
+
+.pause-icon {
+  width : 53px;
+  background-color: rgba(73, 75, 200, 0.15);
+  margin-right : 40px;
+  padding : 10px 10px;
+  border-radius : 53px;
+  cursor : pointer;
+  transition : background-color 0.5s;
+}
+
+.flag-icon {
+  width : 43px;
+  background-color: rgba(73, 75, 200, 0.15);
+  padding : 13px 13px;
+  border-radius : 43px;
+  margin-bottom : 2px;
+  cursor : pointer;
+  transition : background-color 0.5s;
+}
+
+.stop-icon {
+  margin-right : 40px;
+  width : 52px;
+  background-color : rgba(73, 75, 200, 0.15);
+  padding : 10px 10px;
+  border-radius : 60px;
+  cursor : pointer;
+  transition : background-color 0.5s;
+}
+
+.lap-info {
+  display : flex;
+  flex-direction : column;
+  
+}
+
+.icon-para {
+  display : flex;
+  flex-direction: row;
+  align-items : center;
+  margin-top : 20px;
+}
+
+.lap-para {
+  margin-right : 100px;
+  font-size : 20px;
+  font-weight : bold;
+}
+
+.lap-icon {
+  width : 25px;
+  background-color: rgba(73, 75, 200, 0.15);
+  padding : 8px 8px;
+  border-radius : 25px;
+}
+
+/*  hover  */
+
+.play-icon:hover, .flag-icon:hover, .pause-icon:hover, .stop-icon:hover {
+  background-color: rgba(73, 75, 200, 0.25);
+}
+
+.play-icon:active, .flag-icon:active, .pause-icon:active, .stop-icon:active {
+  background-color : rgba(73, 75, 200, 0.25);
+}
