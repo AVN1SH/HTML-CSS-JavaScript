@@ -95,7 +95,7 @@ const timerFunctions = {
   lapTimer() {
     const timerHTML = `
       <div class = "icon-para">
-        <p class = "lap-para">${this.strMin}:${this.strSec}.${this.mini}</P>
+        <p class = "lap-para">${this.strMin}:${this.strSec}.${this.strMini}</P>
         <img src = "icons/flag.svg" class = "js-flag-icon lap-icon">
       </div> 
     `;
