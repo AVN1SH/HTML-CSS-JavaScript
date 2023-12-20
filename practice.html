@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <style>
-    #stopwatch {
-      font-size: 36px;
-      background: yellow; /* Initial background color */
-    }
-  </style>
-</head>
-<body>
-  <div id="stopwatch">0.00</div>
-  <button id="startStopButton">Start</button>
-  <button id="resetButton">Reset</button>
-  <script>const stopwatch = document.getElementById('stopwatch');
-    const startStopButton = document.getElementById('startStopButton');
-    const resetButton = document.getElementById('resetButton');
-    let running = false;
-    let intervalId;
-    
-    startStopButton.addEventListener('click', function () {
-      if (running) {
-        clearInterval(intervalId);
-        startStopButton.textContent = 'Start';
-      } else {
-        intervalId = setInterval(updateStopwatch, 10);
-        startStopButton.textContent = 'Stop';
+  <head>
+    <title>Practice</title>
+    <style>
+      body {
+        background-color : blue;
       }
-      running = !running;
-    });
-    
-    resetButton.addEventListener('click', function () {
-      clearInterval(intervalId);
-      stopwatch.textContent = '0.00';
-      running = false;
-      startStopButton.textContent = 'Start';
-    });
-    
-    let currentTime = 0;
-    
-    function updateStopwatch() {
-      currentTime += 0.01;
-      stopwatch.textContent = currentTime.toFixed(2);
-    }
-    </script>
-</body>
+      body div {
+        padding : 10px;
+        width : 100px;
+        height : 100px;
+        
+        display : flex;
+        align-items: center;
+        justify-content: center;
+        position : relative;
+        
+      }
+      .svg-icon {
+        width : 100%;
+        height : 100%;
+        fill : red;
+        
+      }
+
+      .div1 {
+        animation-name: animate;
+        animation-duration : 1s;
+        animation-iteration-count : 1;
+        animation-timing-function : ease-out;
+      }
+
+      @keyframes animate {
+        0%{
+          clip-path: polygon(50% 50%, 0% 100%, 0 100%, 0 100%, 0 100%, 0 100%);
+        }
+        25% {
+          clip-path: polygon(50% 50%, 0 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%);
+        }
+        50% {
+          clip-path: polygon(50% 50%, 0 100%, 100% 100%, 100% 0, 100% 0, 100% 0);
+        }
+        75% {
+          clip-path: polygon(50% 50%, 0 100%, 100% 100%, 100% 0, 0 0, 0 0);
+        }
+        100% {
+          clip-path: polygon(50% 50%, 0 100%, 100% 100%, 100% 0, 0 0, 0 100%);
+        }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class = 'div1'>
+      <iframe class = 'svg-icon' src = 'TIC-TAC-TOE/icons/radio_button_unchecked_FILL0_wght400_GRAD0_opsz24.svg' width="100" height="100"> </iframe>
+
+    </div>
+  </body>
 </html>

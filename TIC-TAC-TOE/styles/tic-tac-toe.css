@@ -1,0 +1,218 @@
+body {
+  font-family : Arial;
+  color : white;
+  background-color : rgb(44, 44, 44);
+  font-weight : bold;
+  margin : 0;
+  overflow : hidden;
+}
+
+/*video {
+  position : fixed;
+  top : 0;
+  left : 0;
+  width : 100%;
+  height : 100%;
+  object-fit : cover;
+  z-index : 0;
+  filter : blur(5px);
+}*/
+
+.svg-icon-cross, .svg-icon-circle {
+  width : 100%;
+  height : 100%;
+  fill : white;
+}
+
+.svg-icon-cross {
+  fill : rgb(44, 44, 44);
+  stroke : white;
+  stroke-width : 40px;
+}
+
+.boxes {
+  display : grid;
+  grid-template-columns : 100px 100px 100px;
+  grid-template-rows : 100px 100px 100px;
+  margin-top : 50px;
+  justify-content : center;
+  animation-name : animate-boxes;
+  animation-duration : 1s;
+  animation-iteration-count : 1;
+  animation-timing-function : linear;
+  transition : 1s;
+}
+
+.boxes div {
+  border-color : white;
+  border-width : 3.5px;
+}
+
+.first-box {
+  border-style : solid;
+  border-left : none;
+  border-top : none;
+  padding : 10px;
+  padding-left : 13.5px;
+  padding-top : 13.5px;
+  box-shadow: 8px 8px 8px rgba(255, 255, 255, 0.1);
+}
+
+.second-box {
+  border-style : solid;
+  border-top : none;
+  padding : 10px;
+  padding-top : 13.5px;
+  box-shadow: 8px 8px 8px rgba(255, 255, 255, 0.1);
+}
+
+.third-box {
+  border-style : solid;
+  border-right : none;
+  border-top : none;
+  padding : 10px;
+  padding-right : 13.5px;
+  padding-top : 13.5px;
+  box-shadow: -8px 8px 8px rgba(255, 255, 255, 0.1);
+}
+
+.fourth-box {
+  border-style : solid;
+  border-left : none;
+  padding : 10px;
+  padding-left : 13.5px;
+  box-shadow: 8px 8px 8px rgba(255, 255, 255, 0.1);
+}
+
+.fifth-box {
+  border-style : solid;
+  padding : 10px;
+  box-shadow: 8px 8px 8px rgba(255, 255, 255, 0.1);
+}
+
+.sixth-box {
+  border-style : solid;
+  border-right : none;
+  padding : 10px;
+  padding-right : 13.5px;
+  box-shadow: -8px 8px 8px rgba(255, 255, 255, 0.1);
+}
+
+.seventh-box {
+  border-style : solid;
+  border-left : none;
+  border-bottom : none;
+  padding : 10px;
+  padding-left : 13.5px;
+  padding-bottom : 13.5px;
+  box-shadow: 8px -8px 8px rgba(255, 255, 255, 0.1);
+}
+
+.eight-box {
+  border-style : solid;
+  border-bottom : none;
+  padding : 10px;
+  padding-bottom : 13.5px;
+  box-shadow: 8px -8px 8px rgba(255, 255, 255, 0.1);
+}
+
+.ninth-box {
+  border-style : solid;
+  border-bottom : none;
+  border-right : none;
+  padding : 10px;
+  padding-right : 13.5px;
+  padding-bottom : 13.5px;
+  box-shadow: -8px -8px 8px rgba(255, 255, 255, 0.1);
+}
+
+.descriptions {
+  margin-top : 20px;
+  display : flex;
+  align-items : center;
+  justify-content : center;
+  flex-direction : column;
+}
+
+.descriptions p {
+  font-size : 30px;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.25);
+}
+
+.icons {
+  width : 140px;
+  display : flex;
+  flex-direction : row;
+}
+
+.play-again-button {
+  padding : 10px;
+  color : black;
+  box-shadow : 2px 2px 4px rgba(255, 255, 255, 0.25);
+  font-weight : bold;
+  font-size : 16px;
+  cursor : pointer;
+  transition : 0.5s;
+}
+
+/*--Animation Section--*/
+.svg-icon-cross {
+  animation-name : animate-cross;
+  animation-duration : 0.5s;
+  animation-iteration-count : 1;
+  animation-timing-function : linear;
+}
+.svg-icon-circle {
+  animation-name : animate-circle;
+  animation-duration : 0.5s;
+  animation-iteration-count : 1;
+  animation-timing-function : linear;
+}
+
+@keyframes animate-boxes {
+  0% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+  }
+  100% {
+    clip-path : polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+@keyframes animate-cross {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+  }
+  100% {
+    clip-path : circle(50% at 50% 50%);
+  }
+}
+
+@keyframes animate-circle {
+  0%{
+    clip-path: polygon(50% 50%, 0% 100%, 0 100%, 0 100%, 0 100%, 0 100%);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 0 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 100%, 100% 100%, 100% 0, 100% 0, 100% 0);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 0 100%, 100% 100%, 100% 0, 0 0, 0 0);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 0 100%, 100% 100%, 100% 0, 0 0, 0 100%);
+  }
+}
+
+/*@keyframes moveRight {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 50%;
+  }
+  100% {
+    left: 100%;
+  }
+}*/
