@@ -281,10 +281,10 @@ const BoxesFunctions = {
 
   addDescription(index) {
     paraHTML = [
-        `Very well, Enjoy..!😊`,
-        `You lose, Better luck next time..!💀`, 
-        `You win, Nice played..!🥳`,
-        `Tied, Click play again🫤`
+        `Very well, Enjoy..!`,
+        `You lose, Better luck next time..!`, 
+        `You win, Nice played..!`,
+        `Tied, Click play again`
       ];
     document.querySelector('.js-para').innerHTML = `${paraHTML[index]}`;
   },
