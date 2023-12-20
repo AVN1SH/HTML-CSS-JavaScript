@@ -6,21 +6,17 @@ let computerMove = false;
 
 const ChooseEvent = {
   cross() {
-    console.log('cross');
     document.querySelector('.js-cross-icon').addEventListener('click', () => {
       if(crossClick === false && circleClick === false){
         crossClick = true;
         icon = 'cross';
-        console.log(icon);
         BoxesFunctions.removeIcon();
         BoxesFunctions.addDescription(0);
         BoxesEvent.byUser();
       }
     });
   },
-  
   circle() {
-    console.log('circle');
     document.querySelector('.js-circle-icon').addEventListener('click', () => {
       if(crossClick === false && circleClick === false){
         circleClick = true;
@@ -49,7 +45,6 @@ const BoxesEvent = {
   ],
 
   byUser() {
-    console.log('byuser');
     if(Check.isComputerWins()) {
       BoxesFunctions.addDescription(1);
       BoxesFunctions.addPlayAgainButton();
@@ -66,7 +61,6 @@ const BoxesEvent = {
               }
             }
             if(!check) {
-              console.log('byuserclick');
               if(!userMove) {
                 userMove = true;
                 this.userMoveArr.push(index);
@@ -99,8 +93,6 @@ const BoxesEvent = {
     if(computerMove) {
       return;
     }
-    console.log('byComputer');
-    console.log(userMove);
     if(Check.isUserWins()) {
       BoxesFunctions.addDescription(2);
       BoxesFunctions.addPlayAgainButton();
@@ -111,7 +103,6 @@ const BoxesEvent = {
       const computerWinObj = Check.isComputerWinning();
       if(computerWinObj.winning) {
         let check = false;
-        console.log(computerWinObj.patternIndex);
         for(let i = 0; i < this.pattern[computerWinObj.patternIndex].length; i++) {
           for(let j = 0; j < this.computerMoveArr.length; j++) {
             if(this.pattern[computerWinObj.patternIndex][i] === this.computerMoveArr[j]) {
@@ -131,7 +122,6 @@ const BoxesEvent = {
               this.computerMoveArr.push(this.pattern[computerWinObj.patternIndex][i]);
               this.allMovesArr.push(this.pattern[computerWinObj.patternIndex][i]);
               userMove = false;
-              console.log('blockmove');
               if(icon === 'cross') {
                 icon = 'circle';
               }
@@ -149,7 +139,6 @@ const BoxesEvent = {
       const userWinObj = Check.isUserWinning();
       if(userWinObj.winning) {
         let check = false;
-        console.log(userWinObj.patternIndex);
         for(let i = 0; i < this.pattern[userWinObj.patternIndex].length; i++) {
           for(let j = 0; j < this.userMoveArr.length; j++) {
             if(this.pattern[userWinObj.patternIndex][i] === this.userMoveArr[j]) {
@@ -169,7 +158,6 @@ const BoxesEvent = {
               this.computerMoveArr.push(this.pattern[userWinObj.patternIndex][i]);
               this.allMovesArr.push(this.pattern[userWinObj.patternIndex][i]);
               userMove = false;
-              console.log('blockmove');
               if(icon === 'cross') {
                 icon = 'circle';
               }
@@ -186,13 +174,10 @@ const BoxesEvent = {
       }
     
       const rndNum = Math.random();
-      console.log(rndNum);
       let tempNum = 0;
       for(let i = 0; i < this.pattern.length; i++, tempNum += 1/8) {
         if(rndNum >= tempNum && rndNum <= tempNum + (1/8)) {
-          console.log(icon);
           const rndIndex = Math.random();
-          console.log(rndIndex);
           let tempIndex = 0;
           for(let j = 0; j < this.pattern[i].length; j++, tempIndex += 1/3) {
             if(rndIndex >= tempIndex && rndIndex <= tempIndex + 1/3) {
@@ -223,7 +208,6 @@ const BoxesEvent = {
                   this.computerMoveArr.push(this.pattern[i][j]);
                   this.allMovesArr.push(this.pattern[i][j]);
                   userMove = false;
-                  console.log(userMove);
                   if(icon === 'cross') {
                     icon = 'circle';
                   }
@@ -250,7 +234,6 @@ const BoxesEvent = {
 
 const BoxesFunctions = {
   addIcon(boxIndex) {
-    console.log('addIcon');
     document.querySelectorAll('.js-boxes div').forEach((box, index) => {
       if(boxIndex === index) {
         crossIconHTML = `
@@ -323,38 +306,31 @@ const Check = {
       winning : false,
       patternIndex : 0
     }
-    console.log('isUserWinning');
     for(let i = 0; i < BoxesEvent.pattern.length; i++) {
       let count = 0;
       for(let j = 0; j < 3; j++) {
         for(let k = 0; k < BoxesEvent.userMoveArr.length; k++) {
           if(BoxesEvent.pattern[i][j] === BoxesEvent.userMoveArr[k]) {
             count++;
-            console.log(count);
           }
         }
       }
       if(count === 2) {
         let check = false;
-        console.log(count);
-        console.log(BoxesEvent.computerMoveArr);
         for(let temp = 0; temp < 3; temp++) {
           for(let temp2 = 0; temp2 < BoxesEvent.computerMoveArr.length; temp2++) {
             if(BoxesEvent.pattern[i][temp] === BoxesEvent.computerMoveArr[temp2]){
               check = true;
-              console.log(check);
             }
           }
         }
         if(!check) {
           winValues.winning = true;
           winValues.patternIndex = i;
-          console.log(winValues.patternIndex);
           break;
         } else {continue;}
         
       } else {count = 0;}
-      console.log('count');
     }
     
     return winValues;
@@ -371,31 +347,25 @@ const Check = {
         for(let k = 0; k < BoxesEvent.computerMoveArr.length; k++) {
           if(BoxesEvent.pattern[i][j] === BoxesEvent.computerMoveArr[k]) {
             count++;
-            console.log(count);
           }
         }
       }
       if(count === 2) {
         let check = false;
-        console.log(count);
-        console.log(BoxesEvent.computerMoveArr);
         for(let temp = 0; temp < 3; temp++) {
           for(let temp2 = 0; temp2 < BoxesEvent.userMoveArr.length; temp2++) {
             if(BoxesEvent.pattern[i][temp] === BoxesEvent.userMoveArr[temp2]){
               check = true;
-              console.log(check);
             }
           }
         }
         if(!check) {
           winValues.winning = true;
           winValues.patternIndex = i;
-          console.log(winValues.patternIndex);
           break;
         } else {continue;}
         
       } else {count = 0;}
-      console.log('count');
     }
     return winValues;
   },
@@ -403,7 +373,6 @@ const Check = {
   isUserWins() {
     let wins = false;
     let count = 0;
-    console.log(BoxesEvent.userMoveArr);
     for(let i = 0; i < BoxesEvent.pattern.length; i++) {
       for(let j = 0; j < 3; j++) {
         for(let k = 0; k < BoxesEvent.userMoveArr.length; k++) {
@@ -418,20 +387,17 @@ const Check = {
         break;
       } else {count = 0;}
     }
-    console.log(wins);
     return wins;
   },
 
   isComputerWins() {
     let wins = false;
     let count = 0;
-    console.log(BoxesEvent.computerMoveArr);
     for(let i = 0; i < BoxesEvent.pattern.length; i++) {
       for(let j = 0; j < 3; j++) {
         for(let k = 0; k < BoxesEvent.computerMoveArr.length; k++) {
           if(BoxesEvent.pattern[i][j] === BoxesEvent.computerMoveArr[k]) {
             count++;
-            console.log(count);
           }
         }
       }
@@ -441,7 +407,6 @@ const Check = {
         break;
       } else {count = 0;}
     }
-    console.log(wins);
     return wins;
   }
 }
