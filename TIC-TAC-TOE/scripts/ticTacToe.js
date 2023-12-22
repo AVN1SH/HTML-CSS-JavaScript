@@ -5,29 +5,19 @@ let userMove = false;
 let computerMove = false;
 
 const ChooseEvent = {
-  cross() {
-    document.querySelector('.js-cross-icon').addEventListener('click', () => {
-      if(crossClick === false && circleClick === false){
-        crossClick = true;
-        icon = 'cross';
-        BoxesFunctions.removeIcon();
-        BoxesFunctions.addDescription(0);
-        BoxesEvent.byUser();
-      }
-    });
-  },
-  circle() {
-    document.querySelector('.js-circle-icon').addEventListener('click', () => {
-      if(crossClick === false && circleClick === false){
-        circleClick = true;
-        icon = 'circle';
+  selectIcon(iconType) {
+    document.querySelector(`.js-${iconType}-icon`).addEventListener('click', () => {
+      if (!crossClick && !circleClick) {
+        crossClick = iconType === 'cross';
+        circleClick = iconType === 'circle';
+        icon = iconType;
         BoxesFunctions.removeIcon();
         BoxesFunctions.addDescription(0);
         BoxesEvent.byUser();
       }
     });
   }
-}
+};
 
 const BoxesEvent = {
   userMoveArr : [],
@@ -411,5 +401,5 @@ const Check = {
   }
 }
 
-ChooseEvent.cross();
-ChooseEvent.circle();
+ChooseEvent.selectIcon('cross');
+ChooseEvent.selectIcon('circle');
