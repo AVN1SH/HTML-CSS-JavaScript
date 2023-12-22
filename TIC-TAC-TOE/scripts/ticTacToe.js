@@ -39,18 +39,14 @@ const BoxesEvent = {
       BoxesFunctions.addDescription(1);
       BoxesFunctions.addPlayAgainButton();
     }
+
     const boxArr = document.querySelectorAll('.js-boxes div');
     if(crossClick === true || circleClick === true) {
       boxArr.forEach((box, index) => {
         box.addEventListener('click', () => {
           if(!Check.isComputerWins()) {
-            let check = false;
-            for(let i = 0; i < this.allMovesArr.length; i++) {
-              if(this.allMovesArr[i] === index) {
-              check = true; 
-              }
-            }
-            if(!check) {
+            const check = !this.allMovesArr.includes(index);
+            if(check) {
               if(!userMove) {
                 userMove = true;
                 this.userMoveArr.push(index);
@@ -88,8 +84,8 @@ const BoxesEvent = {
       BoxesFunctions.addPlayAgainButton();
       return;
     }
+
     if(userMove) {
-      
       const computerWinObj = Check.isComputerWinning();
       if(computerWinObj.winning) {
         let check = false;
@@ -234,21 +230,14 @@ const BoxesFunctions = {
           <svg class = 'svg-icon-circle' xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
         `;
 
-        if(icon === 'cross') {
-          box.innerHTML = `${crossIconHTML}`; 
-        }
-        else if(icon === 'circle') {
-          box.innerHTML = `${circleIconHTML}`;
-        }
+        box.innerHTML = icon === 'cross' ? crossIconHTML : circleIconHTML;
       }
     });
   },
   
   removeIcon() {
-    const icon = document.querySelectorAll('.js-icons, .js-para');
-    icon.forEach((elements, index) => {
-      removeHTML = '';
-      elements.innerHTML = `${removeHTML}`;
+    document.querySelectorAll('.js-icons, .js-para').forEach((elements) => {
+      elements.innerHTML = '';
     });
   },
 
@@ -259,7 +248,7 @@ const BoxesFunctions = {
         `You win, Nice played..!`,
         `Tied, Click play again`
       ];
-    document.querySelector('.js-para').innerHTML = `${paraHTML[index]}`;
+    document.querySelector('.js-para').innerHTML = paraHTML[index];
   },
 
   addPlayAgainButton() {
@@ -272,46 +261,37 @@ const BoxesFunctions = {
 
 const Check = {
   box() {
-    let check = false;
-    for(let i = 0; i < BoxesEvent.pattern.length; i++) {
-      for(let j = 0; j < BoxesEvent.pattern[i].length; j++) {
-        for(let k = 0; k < BoxesEvent.allMovesArr.length; k++) {
-          if(BoxesEvent.pattern[i][j] === BoxesEvent.allMovesArr[k]) {
-            check = true;
-            break;
-          }
-        }
-        if(check)
-          break;
-      }
-      if(check) {
-        break;
-      }
-    }
-    return check;
+    return BoxesEvent.pattern.some(pattern => pattern.every(cell => BoxesEvent.allMovesArr.includes(cell)));
   },
 
   isUserWinning () {
+    return Check.isWinning('user');
+  }, 
+
+  isComputerWinning() {
+    return Check.isWinning('computer');
+  },
+
+  isWinning(player) {
     const winValues = {
       winning : false,
       patternIndex : 0
     }
+
+    const movesArr = player === 'user' ? BoxesEvent.userMoveArr : BoxesEvent.computerMoveArr;
+
     for(let i = 0; i < BoxesEvent.pattern.length; i++) {
       let count = 0;
       for(let j = 0; j < 3; j++) {
-        for(let k = 0; k < BoxesEvent.userMoveArr.length; k++) {
-          if(BoxesEvent.pattern[i][j] === BoxesEvent.userMoveArr[k]) {
-            count++;
-          }
+        if (movesArr.includes(BoxesEvent.pattern[i][j])) {
+          count++;
         }
       }
       if(count === 2) {
         let check = false;
         for(let temp = 0; temp < 3; temp++) {
-          for(let temp2 = 0; temp2 < BoxesEvent.computerMoveArr.length; temp2++) {
-            if(BoxesEvent.pattern[i][temp] === BoxesEvent.computerMoveArr[temp2]){
-              check = true;
-            }
+          if (BoxesEvent[movesArr === BoxesEvent.userMoveArr ? 'computerMoveArr' : 'userMoveArr'].includes(BoxesEvent.pattern[i][temp])) {
+            check = true;
           }
         }
         if(!check) {
@@ -324,80 +304,33 @@ const Check = {
     }
     
     return winValues;
-  }, 
-
-  isComputerWinning() {
-    const winValues = {
-      winning : false,
-      patternIndex : 0
-    }
-    for(let i = 0; i < BoxesEvent.pattern.length; i++) {
-      let count = 0;
-      for(let j = 0; j < 3; j++) {
-        for(let k = 0; k < BoxesEvent.computerMoveArr.length; k++) {
-          if(BoxesEvent.pattern[i][j] === BoxesEvent.computerMoveArr[k]) {
-            count++;
-          }
-        }
-      }
-      if(count === 2) {
-        let check = false;
-        for(let temp = 0; temp < 3; temp++) {
-          for(let temp2 = 0; temp2 < BoxesEvent.userMoveArr.length; temp2++) {
-            if(BoxesEvent.pattern[i][temp] === BoxesEvent.userMoveArr[temp2]){
-              check = true;
-            }
-          }
-        }
-        if(!check) {
-          winValues.winning = true;
-          winValues.patternIndex = i;
-          break;
-        } else {continue;}
-        
-      } else {count = 0;}
-    }
-    return winValues;
   },
 
   isUserWins() {
-    let wins = false;
-    let count = 0;
-    for(let i = 0; i < BoxesEvent.pattern.length; i++) {
-      for(let j = 0; j < 3; j++) {
-        for(let k = 0; k < BoxesEvent.userMoveArr.length; k++) {
-          if(BoxesEvent.pattern[i][j] === BoxesEvent.userMoveArr[k]) {
-            count++;
-          }
-        }
-      }
-
-      if(count === 3) {
-        wins = true;
-        break;
-      } else {count = 0;}
-    }
-    return wins;
+    return Check.isWins('user');
   },
 
   isComputerWins() {
-    let wins = false;
-    let count = 0;
-    for(let i = 0; i < BoxesEvent.pattern.length; i++) {
-      for(let j = 0; j < 3; j++) {
-        for(let k = 0; k < BoxesEvent.computerMoveArr.length; k++) {
-          if(BoxesEvent.pattern[i][j] === BoxesEvent.computerMoveArr[k]) {
-            count++;
-          }
+    return Check.isWins('computer');
+  },
+
+  isWins(player) {
+    const movesArr = player === 'user' ? BoxesEvent.userMoveArr : BoxesEvent.computerMoveArr;
+    
+    for (let i = 0; i < BoxesEvent.pattern.length; i++) {
+      let count = 0;
+      for (let j = 0; j < 3; j++) {
+        if (movesArr.includes(BoxesEvent.pattern[i][j])) {
+          count++;
         }
       }
 
-      if(count === 3) {
-        wins = true;
-        break;
-      } else {count = 0;}
+      if (count === 3) {
+        return true;
+      }
     }
-    return wins;
+
+    return false;
   }
 }
 
